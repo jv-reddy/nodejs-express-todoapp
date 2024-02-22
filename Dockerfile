@@ -1,10 +1,11 @@
-FROM node:7.7.2-alpine
+FROM node:19
+ENV PORT 3000
+EXPOSE 3000
 
-WORKDIR /usr/app
-
-RUN apk update && apk add postgresql
-
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 COPY package.json .
-RUN npm install --quiet
-
+RUN npm install
 COPY . .
+
+CMD ["npm", "start"]
